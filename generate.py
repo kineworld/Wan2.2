@@ -93,6 +93,9 @@ def _validate_args(args):
     if args.frame_num is None:
         args.frame_num = cfg.frame_num
 
+    if args.frame_num <= 0 or (args.frame_num - 1) % 4 != 0:
+        raise ValueError("frame_num must be positive and have the form 4n+1")
+
     args.base_seed = args.base_seed if args.base_seed >= 0 else random.randint(
         0, sys.maxsize)
     # Size check
